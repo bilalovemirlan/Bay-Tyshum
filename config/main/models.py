@@ -1,14 +1,17 @@
 from django.db import models
 
+
 class Credit_Special(models.Model):
     full_name = models.CharField(max_length=100)
     job_title = models.ForeignKey('Job_titl', on_delete=models.CASCADE)
     #id_klient = models.ForeignKey(ContrAgent, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.full_name
 
     class Meta:
         verbose_name = 'Кредитный специалист'
+
 
 class Job_titl(models.Model):
     name_job_title = models.CharField(max_length=100)
@@ -20,6 +23,7 @@ class Job_titl(models.Model):
         verbose_name = 'Должность'
         verbose_name_plural = 'Должности'
 
+
 class Guarantor(models.Model):
     #id_guarantor= models.ForeignKey('Job_titl', on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
@@ -27,7 +31,10 @@ class Guarantor(models.Model):
         'В браке', 'В браке'
         'Не в браке', 'Не в браке'
     ]
-    status  = models.CharField(max_length=30, choices=STATUS, default="Не в браке")
+    status = models.CharField(
+        max_length=30,
+        choices=STATUS,
+        default="Не в браке")
     credit_history = models.CharField(max_length=200)
     telephone = models.CharField(max_length=30)
     addres = models.CharField(max_length=100)
@@ -38,6 +45,7 @@ class Guarantor(models.Model):
 
     class Meta:
         verbose_name = 'Поручитель'
+
 
 class Company(models.Model):
     company_names = models.CharField(max_length=50)
@@ -52,6 +60,7 @@ class Company(models.Model):
     class Meta:
         verbose_name = 'Компания'
 
+
 class Property(models.Model):
     name = models.CharField(max_length=100)
     document = models.FileField(upload_to='document/%Y/%m/%d')
@@ -61,6 +70,7 @@ class Property(models.Model):
 
     class Meta:
         verbose_name = 'Имущество'
+
 
 class TelephoneConversations(models.Model):
     name = models.CharField(max_length=100)
@@ -94,31 +104,47 @@ class DataKK(models.Model):
         verbose_name_plural = "Документы на КК:"
 
 
-
 class ContrClient(models.Model):
     STATUS_CHOICES = [
         ('1', 'Можно давать кредит :'),
         ('2', 'Нельзя давать кредит:'),
     ]
-    FAMILY =[
+    FAMILY = [
         ("1", "В браке:"),
         ("2", "Не в браке:"),
     ]
 
     full_name = models.CharField(verbose_name="ФИО:", max_length=150)
-    views_credit = models.CharField(verbose_name="Вид кредита:", max_length=159)
-    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="2")
+    views_credit = models.CharField(
+        verbose_name="Вид кредита:", max_length=159)
+    status = models.CharField(
+        max_length=100,
+        choices=STATUS_CHOICES,
+        default="2")
     sum_credit = models.DecimalField(max_digits=60, decimal_places=5)
     family = models.CharField(max_length=100, choices=FAMILY)
-    credit_history = models.CharField(max_length=100, verbose_name="Кредитная история:")
-    number_phone = models.CharField(verbose_name="Номер телефона:", max_length=30)
+    credit_history = models.CharField(
+        max_length=100, verbose_name="Кредитная история:")
+    number_phone = models.CharField(
+        verbose_name="Номер телефона:", max_length=30)
     address = models.CharField(verbose_name="Адресс:", max_length=100)
-    zp_6_month = models.FileField(verbose_name="Док. ЗП: За последние 6 месяцев:")
-    call_parlay = models.FileField(upload_to="parlay/%Y/%m/%d", verbose_name="Телефонные переговоры:")
-    meeting_special = models.FileField(verbose_name="Встречи с специалистом:", upload_to="meeting/%Y/%m/%d")
-    contracts = models.FileField(upload_to="contracts/%Y/%m/", verbose_name="Договор с подрядчиками и поставщиками:")
-    report_contracts = models.FileField(upload_to="report_contracts/%Y/%m/%d", verbose_name="Отчет подрядчиков и поставщиков об оказанной услуг и.т.д:")
-    monitoring_report = models.FileField(upload_to="monitoring/%Y/%m/%d", verbose_name="Отчет по мониторингу в Т.Ч. видео отчет:")
+    zp_6_month = models.FileField(
+        verbose_name="Док. ЗП: За последние 6 месяцев:")
+    call_parlay = models.FileField(
+        upload_to="parlay/%Y/%m/%d",
+        verbose_name="Телефонные переговоры:")
+    meeting_special = models.FileField(
+        verbose_name="Встречи с специалистом:",
+        upload_to="meeting/%Y/%m/%d")
+    contracts = models.FileField(
+        upload_to="contracts/%Y/%m/",
+        verbose_name="Договор с подрядчиками и поставщиками:")
+    report_contracts = models.FileField(
+        upload_to="report_contracts/%Y/%m/%d",
+        verbose_name="Отчет подрядчиков и поставщиков об оказанной услуг и.т.д:")
+    monitoring_report = models.FileField(
+        upload_to="monitoring/%Y/%m/%d",
+        verbose_name="Отчет по мониторингу в Т.Ч. видео отчет:")
 
     def __str__(self):
         return self.full_name
@@ -127,13 +153,7 @@ class ContrClient(models.Model):
         verbose_name = "Контрагент:"
         verbose_name_plural = "Контрагенты:"
 
-
-
-
-
-
     # id_num_parley = models.ForeignKey()
     # id_pledge = models.ForeignKey()
     # id_company = models.ForeignKey()
     # id_poruch - models.ForeignKey()
-
