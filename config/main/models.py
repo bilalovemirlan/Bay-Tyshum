@@ -9,6 +9,7 @@ class Credit_Special(models.Model):
 
     class Meta:
         verbose_name = 'Кредитный специалист'
+
 class Job_titl(models.Model):
     name_job_title = models.CharField(max_length=100)
 
@@ -38,9 +39,6 @@ class Guarantor(models.Model):
     class Meta:
         verbose_name = 'Поручитель'
 
-
-
-
 class Company(models.Model):
     company_names = models.CharField(max_length=50)
     legal_address = models.CharField(max_length=100)
@@ -51,13 +49,8 @@ class Company(models.Model):
     def __str__(self):
         return self.company_names
 
-
     class Meta:
         verbose_name = 'Компания'
-
-
-
-
 
 class Property(models.Model):
     name = models.CharField(max_length=100)
@@ -69,10 +62,6 @@ class Property(models.Model):
     class Meta:
         verbose_name = 'Имущество'
 
-
-
-
-
 class TelephoneConversations(models.Model):
     name = models.CharField(max_length=100)
     date = models.CharField(max_length=30)
@@ -81,11 +70,8 @@ class TelephoneConversations(models.Model):
     def __str__(self):
         return self.name
 
-
     class Meta:
         verbose_name_plural = 'Телефонные переговоры'
-
-
 
 class DataKK(models.Model):
     data_created = models.DateTimeField(
