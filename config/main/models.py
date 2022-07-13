@@ -5,7 +5,7 @@ class Credit_Special(models.Model):
     full_name = models.CharField(max_length=100)
 
     job_title = models.ForeignKey('Job_titl', on_delete=models.CASCADE)
-    id_klient = models.ForeignKey(ContrAgent, on_delete=models.CASCADE)
+    id_klient = models.ForeignKey(ContrClient, on_delete=models.CASCADE)
 
 
     def __str__(self):
