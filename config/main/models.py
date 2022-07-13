@@ -1,6 +1,21 @@
 from django.db import models
 
 
+class Credit_Special(models.Model):
+    full_name = models.CharField(max_length=100)
+    job_title = models.ForeignKey('Job_titl', on_delete=models.CASCADE)
+    #id_klient = models.ForeignKey(ContrAgent, on_delete=models.CASCADE)
+
+class Job_titl(models.Model):
+    name_job_title = models.CharField(max_length=100)
+
+
+class Guarantor(models.Model):
+    #id_guarantor= models.ForeignKey('Job_titl', on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100)
+    Credit_history = models.CharField(max_length=200)
+
+
 class DataKK(models.Model):
     data_created = models.DateTimeField(
         auto_now_add=True, verbose_name="Дата создания:")
@@ -16,13 +31,13 @@ class DataKK(models.Model):
     scoring = models.CharField(verbose_name="Скоринг:", max_length=150)
     # id_clinet = models.ForeignKey(KontrClient, on_delete=models.CASCADE)
 
+
 class ContrClient(models.Model):
     STATUS_CHOICES = [
-        ('1', 'Можно давать кредит:'),
+        ('1', 'Можно давать кредит :'),
         ('2', 'Нельзя давать кредит:'),
     ]
 
     full_name = models.CharField(verbose_name="ФИО:", max_length=150)
     views_credit = models.CharField(verbose_name="Вид кредита:", max_length=159)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="2")
-
