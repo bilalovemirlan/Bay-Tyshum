@@ -116,6 +116,10 @@ class ContrClient(models.Model):
     ]
 
     full_name = models.CharField(verbose_name="ФИО:", max_length=150)
+
+    views_credit = models.CharField(verbose_name="Вид кредита:", max_length=159)
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="2")
+
     views_credit = models.CharField(
         verbose_name="Вид кредита:", max_length=159)
     status = models.CharField(
@@ -160,3 +164,4 @@ class ContrClient(models.Model):
     class Meta:
         verbose_name = "Контрагент:"
         verbose_name_plural = "Контрагенты:"
+
