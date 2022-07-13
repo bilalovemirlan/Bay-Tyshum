@@ -3,8 +3,10 @@ from django.db import models
 
 class Credit_Special(models.Model):
     full_name = models.CharField(max_length=100)
-    job_title = models.ForeignKey(Job_titl, on_delete=models.CASCADE)
-    id_klient = models.ForeignKey(ContrAgent, on_delete=models.CASCADE)
+
+    job_title = models.ForeignKey('Job_titl', on_delete=models.CASCADE)
+    id_klient = models.ForeignKey('ContrClient', on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.full_name
@@ -97,7 +99,7 @@ class DataKK(models.Model):
         upload_to="all_dogovor/%Y/%m/%d")
     scoring = models.CharField(verbose_name="Скоринг:", max_length=150)
 
-    id_clinet = models.ForeignKey(ContrClient, on_delete=models.CASCADE)
+    id_clinet = models.ForeignKey('ContrClient', on_delete=models.CASCADE)
     id_spec = models.ForeignKey(Credit_Special, on_delete=models.CASCADE)
 
     class Meta:
@@ -151,6 +153,7 @@ class ContrClient(models.Model):
         upload_to="monitoring/%Y/%m/%d",
         verbose_name="Отчет по мониторингу в Т.Ч. видео отчет:")
 
+
     id_guarant = models.ForeignKey(Guarantor, on_delete=models.CASCADE)
     id_company = models.ForeignKey(Company, on_delete=models.CASCADE)
     id_pledge = models.ForeignKey(Property, on_delete=models.CASCADE)
@@ -158,10 +161,15 @@ class ContrClient(models.Model):
         TelephoneConversations,
         on_delete=models.CASCADE)
 
+
     def __str__(self):
         return self.full_name
 
     class Meta:
         verbose_name = "Контрагент:"
+
+        verbose_name_plural = "Контрагенты:"
+
+
         verbose_name_plural = "Контрагенты:"
 
