@@ -3,8 +3,8 @@ from django.db import models
 
 class Credit_Special(models.Model):
     full_name = models.CharField(max_length=100)
-    job_title = models.ForeignKey('Job_titl', on_delete=models.CASCADE)
-    #id_klient = models.ForeignKey(ContrAgent, on_delete=models.CASCADE)
+    job_title = models.ForeignKey(Job_titl, on_delete=models.CASCADE)
+    id_klient = models.ForeignKey(ContrAgent, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.full_name
@@ -25,7 +25,6 @@ class Job_titl(models.Model):
 
 
 class Guarantor(models.Model):
-    #id_guarantor= models.ForeignKey('Job_titl', on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
     STATUS = [
         'В браке', 'В браке'
@@ -97,7 +96,9 @@ class DataKK(models.Model):
         verbose_name="Все заключенные договора, перечень и сканы:",
         upload_to="all_dogovor/%Y/%m/%d")
     scoring = models.CharField(verbose_name="Скоринг:", max_length=150)
-    # id_clinet = models.ForeignKey(KontrClient, on_delete=models.CASCADE)
+
+    id_clinet = models.ForeignKey(ContrClient, on_delete=models.CASCADE)
+    id_spec = models.ForeignKey(Credit_Special, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Документ на КК:"
@@ -146,14 +147,16 @@ class ContrClient(models.Model):
         upload_to="monitoring/%Y/%m/%d",
         verbose_name="Отчет по мониторингу в Т.Ч. видео отчет:")
 
+    id_guarant = models.ForeignKey(Guarantor, on_delete=models.CASCADE)
+    id_company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    id_pledge = models.ForeignKey(Property, on_delete=models.CASCADE)
+    id_num_parley = models.ForeignKey(
+        TelephoneConversations,
+        on_delete=models.CASCADE)
+
     def __str__(self):
         return self.full_name
 
     class Meta:
         verbose_name = "Контрагент:"
         verbose_name_plural = "Контрагенты:"
-
-    # id_num_parley = models.ForeignKey()
-    # id_pledge = models.ForeignKey()
-    # id_company = models.ForeignKey()
-    # id_poruch - models.ForeignKey()
