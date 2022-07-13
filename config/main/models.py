@@ -5,7 +5,7 @@ class Credit_Special(models.Model):
     full_name = models.CharField(max_length=100)
 
     job_title = models.ForeignKey('Job_titl', on_delete=models.CASCADE)
-    id_klient = models.ForeignKey(ContrClient, on_delete=models.CASCADE)
+    id_klient = models.ForeignKey('ContrClient', on_delete=models.CASCADE)
 
 
     def __str__(self):
@@ -99,7 +99,7 @@ class DataKK(models.Model):
         upload_to="all_dogovor/%Y/%m/%d")
     scoring = models.CharField(verbose_name="Скоринг:", max_length=150)
 
-    id_clinet = models.ForeignKey(ContrClient, on_delete=models.CASCADE)
+    id_clinet = models.ForeignKey('ContrClient', on_delete=models.CASCADE)
     id_spec = models.ForeignKey(Credit_Special, on_delete=models.CASCADE)
 
     class Meta:
@@ -164,10 +164,3 @@ class ContrClient(models.Model):
     class Meta:
         verbose_name = "Контрагент:"
         verbose_name_plural = "Контрагенты:"
-
-
-    # id_num_parley = models.ForeignKey()
-    # id_pledge = models.ForeignKey()
-    # id_company = models.ForeignKey()
-    # id_poruch - models.ForeignKey()
-
